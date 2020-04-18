@@ -60,7 +60,7 @@ class StreamProcess(models.Model):
     expires_at = models.DateTimeField()
     last_heartbeat = models.DateTimeField()
 
-    keys = models.ForeignKey(ApiKey, null=True)
+    keys = models.ForeignKey(ApiKey, null=True, on_delete=models.CASCADE)
     hostname = models.CharField(max_length=250)
     process_id = models.PositiveIntegerField()
     memory_usage = models.CharField(max_length=30, default=None, null=True, blank=True)

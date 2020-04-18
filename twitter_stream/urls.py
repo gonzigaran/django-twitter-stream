@@ -1,6 +1,8 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
+from twitter_stream import views
 
-urlpatterns = patterns('twitter_stream.views',
-                       url(r'^$', 'status', name='status'),
-                       url(r'^update/', 'json_status', name='update'),
-)
+app_name = 'twitter_stream'
+urlpatterns = [
+    url(r'^$', views.status, name='status'),
+    url(r'^update/', views.json_status, name='update'),
+]

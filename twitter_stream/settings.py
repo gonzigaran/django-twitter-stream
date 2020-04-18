@@ -22,3 +22,6 @@ MONITOR_PERFORMANCE = _stream_settings.get('MONITOR_PERFORMANCE', True)
 
 # The number of tweets to insert into the database at once
 INSERT_BATCH_SIZE = _stream_settings.get('INSERT_BATCH_SIZE', 1000)
+
+# South migrations
+SOUTH_MIGRATION_MODULES = { 'twitter-stream': 'django_twitter_stream.twitter_stream.south_migrations', }

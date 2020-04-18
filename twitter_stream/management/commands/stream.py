@@ -1,5 +1,4 @@
 import logging
-from optparse import make_option
 from logging.config import dictConfig
 import time
 import signal
@@ -43,43 +42,44 @@ class Command(BaseCommand):
     python manage.py stream MyCredentialsName
     """
 
-    option_list = BaseCommand.option_list + (
-        make_option(
+    def add_arguments(self, parser):
+        super(Command, self).add_arguments(parser)
+        parser.add_argument(
             '--poll-interval',
             action='store',
             dest='poll_interval',
             default=settings.POLL_INTERVAL,
             help='Seconds between term updates and tweet inserts.'
         ),
-        make_option(
+        parser.add_argument(
             '--prevent-exit',
             action='store_true',
             dest='prevent_exit',
             default=False,
             help='Put the stream in a loop to prevent random termination. Use this if you are not running inside a process management system like supervisord.'
         ),
-        make_option(
+        parser.add_argument(
             '--to-file',
             action='store',
             dest='to_file',
             default=None,
             help='Write tweets to the given JSON file instead of the database.'
         ),
-        make_option(
+        parser.add_argument(
             '--from-file',
             action='store',
             dest='from_file',
             default=None,
             help='Read tweets from a given file, one JSON tweet per line.'
         ),
-        make_option(
+        parser.add_argument(
             '--from-file-long',
             action='store',
             dest='from_file_long',
             default=None,
             help='Read tweets from a given file, where JSON tweets are pretty-printed.'
         ),
-        make_option(
+        parser.add_argument(
             '--rate-limit',
             action='store',
             dest='rate_limit',
@@ -87,7 +87,7 @@ class Command(BaseCommand):
             type=float,
             help='Rate to read in tweets, used ONLY if streaming from a file.'
         ),
-        make_option(
+        parser.add_argument(
             '--limit',
             action='store',
             dest='limit',
@@ -95,7 +95,6 @@ class Command(BaseCommand):
             type=int,
             help='Limit the number of tweets, used ONLY if streaming from a file.'
         )
-    )
     args = '<keys_name>'
     help = "Starts a streaming connection to Twitter"
 

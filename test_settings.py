@@ -32,5 +32,4 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bootstrap3',
     'twitter_stream',
-    'south',
 )
